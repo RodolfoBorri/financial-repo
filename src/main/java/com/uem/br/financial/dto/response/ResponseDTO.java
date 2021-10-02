@@ -1,4 +1,4 @@
-package com.uem.br.financial.response;
+package com.uem.br.financial.dto.response;
 
 import java.util.Arrays;
 import java.util.List;

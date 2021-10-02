@@ -13,9 +13,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.uem.br.financial.Exception.ServiceException;
-import com.uem.br.financial.response.ErroResponseDTO;
-import com.uem.br.financial.response.ResponseDTO;
+import com.uem.br.financial.dto.response.ErroResponseDTO;
+import com.uem.br.financial.dto.response.ResponseDTO;
+import com.uem.br.financial.exception.ServiceException;
 
 @CrossOrigin(origins =  "http://localhost:3000/")
 public class ControllerBase {

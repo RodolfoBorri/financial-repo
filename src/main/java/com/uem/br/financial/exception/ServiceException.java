@@ -1,4 +1,4 @@
-package com.uem.br.financial.Exception;
+package com.uem.br.financial.exception;
 
 import java.util.Arrays;
 
