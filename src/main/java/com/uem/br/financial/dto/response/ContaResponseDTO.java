@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -19,18 +20,18 @@ import lombok.ToString;
 @ToString
 @Builder
 @JsonInclude(Include.NON_NULL)
-public class UserResponseDTO {
+public class ContaResponseDTO {
 
 	private Long id;
 	
-	private String nomeUsuario;
+	private String descricao;
 	
-	private String nome;
+	private Double valor;
 
-	private String CPFCNPJ;
+	private Date dataPagamento;
 
-	private Date DataNasc;
+	private Date dataVencimento;
 	
-	private String tipoUsuario;
+	private String tipoConta;
 	
 }

@@ -1,7 +1,5 @@
 package com.uem.br.financial.dto.request;
 
-import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,18 +13,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
-public class UserRequestDTO {
+public class CarteiraRequestDTO {
 	
-	private String nomeUsuario;
-	
-	private String senhaUsuario;
-	
-	private String nome;
+	private Long idUsuario;
 
-	private String CPFCNPJ;
-
-	private Date DataNasc;
+	private Double fundos;
 	
-	private Long idTipoUsuario;
-	
+	private Double rentabilidade;
 }

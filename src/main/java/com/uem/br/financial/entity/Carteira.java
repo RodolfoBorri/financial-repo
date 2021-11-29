@@ -12,22 +12,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "db_usuario")
-public class User {
+@Table(name = "db_carteira")
+public class Carteira {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Column(name = "fundos", nullable = false)
+	private Double fundos;
 	
-	@Column(name = "nome_usuario", nullable = false)
-	private String nomeUsuario;
-	
-	@Column(name = "senha_usuario", nullable = false)
-	private String senhaUsuario;
+	@Column(name = "rentabilidade", nullable = false)
+	private Double rentabilidade;
 }

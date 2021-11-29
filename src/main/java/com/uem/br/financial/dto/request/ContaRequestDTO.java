@@ -15,18 +15,17 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
-public class UserRequestDTO {
-	
-	private String nomeUsuario;
-	
-	private String senhaUsuario;
-	
-	private String nome;
+public class ContaRequestDTO {
 
-	private String CPFCNPJ;
+	private String descricao;
+	
+	private Double valor;
 
-	private Date DataNasc;
+	private Date dataPagamento;
+
+	private Date dataVencimento;
 	
-	private Long idTipoUsuario;
+	private Long idTipoConta;
 	
+	private Long idUsuario;
 }
