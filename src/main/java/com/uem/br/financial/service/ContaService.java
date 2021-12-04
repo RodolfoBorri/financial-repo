@@ -38,6 +38,7 @@ public class ContaService {
 	private Conta contaRequestDTOParaEntidade(ContaRequestDTO contaRequestDTO, Conta conta) {
 		conta.setDataPagamento(contaRequestDTO.getDataPagamento());
 		conta.setDataVencimento(contaRequestDTO.getDataVencimento());
+		conta.setCategoria(contaRequestDTO.getCategoria());
 		conta.setDescricao(contaRequestDTO.getDescricao());
 		conta.setValor(contaRequestDTO.getValor());
 		conta.setTipoConta(tipoContaService.buscaPorId(contaRequestDTO.getIdTipoConta()));
@@ -52,6 +53,7 @@ public class ContaService {
 										 .dataVencimento(conta.getDataVencimento())
 										 .valor(conta.getValor())
 										 .descricao(conta.getDescricao())
+										 .categoria(conta.getCategoria())
 										 .tipoConta(conta.getTipoConta().getTipo())
 										 .build();
 	}

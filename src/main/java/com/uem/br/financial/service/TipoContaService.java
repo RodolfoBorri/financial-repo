@@ -36,7 +36,6 @@ public class TipoContaService {
 	private TipoContaResponseDTO entidadeParaTipoContaResponseDTO(TipoConta tipoConta) {
 		return TipoContaResponseDTO.builder().id(tipoConta.getId())
 							   			  .tipo(tipoConta.getTipo())
-							   			  .categoria(tipoConta.getCategoria())
 							   			  .build();
 	}
 }

@@ -25,6 +25,8 @@ public class ContaRequestDTO {
 
 	private Date dataVencimento;
 	
+	private String categoria;
+	
 	private Long idTipoConta;
 	
 	private Long idUsuario;

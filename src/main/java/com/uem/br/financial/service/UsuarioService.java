@@ -1,5 +1,8 @@
 package com.uem.br.financial.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +39,10 @@ public class UsuarioService {
 	private UserResponseDTO entidadeParaUsuarioResponseDTO(Usuario user) {
 		return UserResponseDTO.builder().id(user.getId())
 										.nomeUsuario(user.getNomeUsuario())
+										.CPFCNPJ(user.getCPFCNPJ())
+										.DataNasc(user.getDataNasc())
+										.nome(user.getNome())
+										.tipoUsuario(user.getTipoUsuario().getTipo())										
 										.build();
 	}
 
@@ -57,12 +64,12 @@ public class UsuarioService {
 		}
 		
 		if(userRepository.findByCPFCNPJ(userRequestDTO.getCpfcnpj()).isPresent()) {
-			throw new ServiceException("DB-2", userRequestDTO.getCpfcnpj());
+			throw new ServiceException("DB-3", userRequestDTO.getCpfcnpj());
 		}
 	}
 	
 	public Usuario buscaPorId(Long idUsuario) {
-		return userRepository.findById(idUsuario).get();
+		return userRepository.findById(idUsuario).orElseThrow(() -> new ServiceException("DB-6", idUsuario));
 	}
 
 	public void altera(Long idUsuario, @Valid UserRequestDTO userRequestDTO) {
@@ -71,5 +78,23 @@ public class UsuarioService {
 		Usuario usuarioAlterado = usuarioRequestDTOParaEntidade(userRequestDTO, buscaPorId(idUsuario));
 		
 		userRepository.save(usuarioAlterado);		
+	}
+
+	public List<UserResponseDTO> consultaTodos() {
+		List<UserResponseDTO> retorno = new ArrayList<UserResponseDTO>();
+		
+		List<Usuario> usuarios = userRepository.findAll();
+		
+		for(Usuario usuario : usuarios) {
+			retorno.add(entidadeParaUsuarioResponseDTO(usuario));
+		}
+		
+		return retorno;
+	}
+
+	public UserResponseDTO consultaPorId(Long id) {
+		Usuario usuario = buscaPorId(id);
+		
+		return entidadeParaUsuarioResponseDTO(usuario);
 	}
 }

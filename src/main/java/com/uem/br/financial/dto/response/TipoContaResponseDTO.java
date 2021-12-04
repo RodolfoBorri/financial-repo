@@ -22,6 +22,4 @@ public class TipoContaResponseDTO {
 	private Long id;	
 	
 	private String tipo;
-	
-	private String categoria;
 }

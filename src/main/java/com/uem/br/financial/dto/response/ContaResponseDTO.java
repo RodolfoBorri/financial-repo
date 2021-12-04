@@ -34,4 +34,6 @@ public class ContaResponseDTO {
 	
 	private String tipoConta;
 	
+	private String categoria;
+	
 }

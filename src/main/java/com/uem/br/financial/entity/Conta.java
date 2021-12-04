@@ -41,6 +41,9 @@ public class Conta {
 	@Column(name = "data_vencimento", nullable = false)
 	private Date dataVencimento;
 	
+	@Column(name = "categoria", nullable = false)
+	private String categoria;
+	
 	@ManyToOne
 	@JoinColumn(name = "id_usuario", nullable = false, referencedColumnName = "id")
 	private Usuario usuario;
