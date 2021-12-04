@@ -28,11 +28,17 @@ public class ContaService {
 	public ContaResponseDTO adiciona(ContaRequestDTO contaRequestDTO) {
 		validacaoConta(contaRequestDTO);
 		
+		realizaOperacao(contaRequestDTO);
+		
 		Conta conta = contaRequestDTOParaEntidade(contaRequestDTO, new Conta());
 		
 		contaRepository.save(conta);
 		
 		return entidadeParaContaResponseDTO(conta);
+	}
+
+	private void realizaOperacao(ContaRequestDTO contaRequestDTO) {
+		userService.refleteOperacao(contaRequestDTO.getCategoria(), contaRequestDTO.getValor(), contaRequestDTO.getIdUsuario());		
 	}
 
 	private Conta contaRequestDTOParaEntidade(ContaRequestDTO contaRequestDTO, Conta conta) {

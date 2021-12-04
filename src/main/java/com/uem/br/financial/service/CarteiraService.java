@@ -12,6 +12,9 @@ import com.uem.br.financial.repository.CarteiraRepository;
 
 @Service
 public class CarteiraService {
+	
+	private final String CONTA_PAGAR = "a pagar";
+	private final String CONTA_RECEBER = "a receber";
 
 	@Autowired
 	CarteiraRepository carteiraRepository;
@@ -49,7 +52,7 @@ public class CarteiraService {
 		
 		validaFundos(carteiraRequestDTO);
 
-		usuario.setCarteira(carteira);
+		carteira.setFundos(carteira.getFundos() + carteiraRequestDTO.getFundos());
 		carteiraRepository.save(carteira);
 	}
 
@@ -57,6 +60,20 @@ public class CarteiraService {
 		if(carteiraRequestDTO.getFundos() < 0) {
 			throw new ServiceException("DB-4");
 		}
+	}
+
+	public void refleteAlteracaoCarteira(String categoria, Double valor, Usuario usuario) {
+		
+		Carteira carteira = buscaPorId(usuario.getCarteira().getId());
+
+		if(CONTA_PAGAR.equalsIgnoreCase(categoria)){
+			carteira.setFundos(carteira.getFundos() - valor);
+		}
+		else if (CONTA_RECEBER.equalsIgnoreCase(categoria)) {
+			carteira.setFundos(carteira.getFundos() + valor);
+		}
+		
+		carteiraRepository.save(carteira);
 	}
 
 }

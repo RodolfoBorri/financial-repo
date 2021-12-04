@@ -97,4 +97,10 @@ public class UsuarioService {
 		
 		return entidadeParaUsuarioResponseDTO(usuario);
 	}
+
+	public void refleteOperacao(String categoria, Double valor, Long idUsuario) {
+		Usuario usuario = buscaPorId(idUsuario);
+		
+		carteiraService.refleteAlteracaoCarteira(categoria, valor, usuario);		
+	}
 }
