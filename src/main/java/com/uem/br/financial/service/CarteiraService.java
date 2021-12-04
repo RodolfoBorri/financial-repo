@@ -23,7 +23,14 @@ public class CarteiraService {
 	}
 
 	public Carteira criaCarteira() {
-		return new Carteira();
+		Carteira carteira = new Carteira();
+		
+		carteira.setFundos(new Double(0));
+		carteira.setRentabilidade(new Double(0));		
+		
+		carteiraRepository.save(carteira);
+		
+		return carteira;
 	}
 
 	public void adicionaFundosERentabilidade(CarteiraRequestDTO carteiraRequestDTO) {

@@ -23,9 +23,9 @@ public class UserRequestDTO {
 	
 	private String nome;
 
-	private String CPFCNPJ;
+	private String cpfcnpj;
 
-	private Date DataNasc;
+	private Date dataNasc;
 	
 	private Long idTipoUsuario;
 	

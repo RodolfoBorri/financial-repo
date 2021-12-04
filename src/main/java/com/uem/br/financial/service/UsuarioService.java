@@ -45,7 +45,7 @@ public class UsuarioService {
 		user.setNome(userRequestDTO.getNome());
 		user.setCarteira(carteiraService.criaCarteira());
 		user.setTipoUsuario(tipoUsuarioService.buscaPorId(userRequestDTO.getIdTipoUsuario()));
-		user.setCPFCNPJ(userRequestDTO.getCPFCNPJ());
+		user.setCPFCNPJ(userRequestDTO.getCpfcnpj());
 		user.setDataNasc(userRequestDTO.getDataNasc());
 		
 		return user;
@@ -56,8 +56,8 @@ public class UsuarioService {
 			throw new ServiceException("DB-1", userRequestDTO.getNomeUsuario());
 		}
 		
-		if(userRepository.findByCPFCNPJ(userRequestDTO.getCPFCNPJ()).isPresent()) {
-			throw new ServiceException("DB-2", userRequestDTO.getCPFCNPJ());
+		if(userRepository.findByCPFCNPJ(userRequestDTO.getCpfcnpj()).isPresent()) {
+			throw new ServiceException("DB-2", userRequestDTO.getCpfcnpj());
 		}
 	}
 	
