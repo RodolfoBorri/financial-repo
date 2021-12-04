@@ -26,7 +26,4 @@ public class TipoConta {
 	
 	@Column(name = "tipo", nullable = false)
 	private String tipo;
-	
-	@Column(name = "categoria", nullable = false)
-	private String categoria;
 }

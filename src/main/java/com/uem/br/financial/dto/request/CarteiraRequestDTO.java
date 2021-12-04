@@ -18,6 +18,4 @@ public class CarteiraRequestDTO {
 	private Long idUsuario;
 
 	private Double fundos;
-	
-	private Double rentabilidade;
 }

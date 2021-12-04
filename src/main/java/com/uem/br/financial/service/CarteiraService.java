@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uem.br.financial.dto.request.CarteiraRequestDTO;
+import com.uem.br.financial.dto.response.CarteiraResponseDTO;
 import com.uem.br.financial.entity.Carteira;
 import com.uem.br.financial.entity.Usuario;
 import com.uem.br.financial.exception.ServiceException;
@@ -25,28 +26,28 @@ public class CarteiraService {
 	public Carteira criaCarteira() {
 		Carteira carteira = new Carteira();
 		
-		carteira.setFundos(new Double(0));
-		carteira.setRentabilidade(new Double(0));		
+		carteira.setFundos(new Double(0));	
 		
 		carteiraRepository.save(carteira);
 		
 		return carteira;
 	}
+	
+	private CarteiraResponseDTO entidadeParaCarteiraResponseDTO(Carteira carteira) {
+		return CarteiraResponseDTO.builder().fundos(carteira.getFundos()).build();
+	}
+	
+	public CarteiraResponseDTO buscaCarteiraPorIdUsuario(Long idUsuario) {
+		Carteira carteira = carteiraRepository.findById(usuarioService.buscaPorId(idUsuario).getCarteira().getId()).get();
+		
+		return entidadeParaCarteiraResponseDTO(carteira);
+	}
 
-	public void adicionaFundosERentabilidade(CarteiraRequestDTO carteiraRequestDTO) {
+	public void adicionaFundos(CarteiraRequestDTO carteiraRequestDTO) {
 		Usuario usuario = usuarioService.buscaPorId(carteiraRequestDTO.getIdUsuario());
 		Carteira carteira = buscaPorId(usuario.getCarteira().getId());
 		
 		validaFundos(carteiraRequestDTO);
-
-		if (carteiraRequestDTO.getRentabilidade() > 0 && carteiraRequestDTO.getFundos() > 0) {
-			carteira.setFundos(carteiraRequestDTO.getFundos());
-			carteira.setRentabilidade(carteiraRequestDTO.getRentabilidade());
-		} else if (carteiraRequestDTO.getFundos() > 0) {
-			carteira.setFundos(carteiraRequestDTO.getFundos());
-		} else if (carteiraRequestDTO.getRentabilidade() > 0) {
-			carteira.setRentabilidade(carteiraRequestDTO.getRentabilidade());
-		}
 
 		usuario.setCarteira(carteira);
 		carteiraRepository.save(carteira);
@@ -55,10 +56,6 @@ public class CarteiraService {
 	private void validaFundos(CarteiraRequestDTO carteiraRequestDTO) {
 		if(carteiraRequestDTO.getFundos() < 0) {
 			throw new ServiceException("DB-4");
-		}
-		
-		if(carteiraRequestDTO.getRentabilidade() < 0) {
-			throw new ServiceException("DB-5");
 		}
 	}
 

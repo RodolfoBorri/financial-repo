@@ -94,4 +94,10 @@ public class ContaService {
 		return response;
 	}
 
+	public ContaResponseDTO consultaContaPorIdConta(Long idConta) {
+		Conta conta = buscaPorId(idConta);
+		
+		return entidadeParaContaResponseDTO(conta); 
+	}
+
 }

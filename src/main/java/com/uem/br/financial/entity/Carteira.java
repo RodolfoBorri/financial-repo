@@ -25,8 +25,5 @@ public class Carteira {
 	private Long id;
 
 	@Column(name = "fundos", nullable = false)
-	private Double fundos;
-	
-	@Column(name = "rentabilidade", nullable = false)
-	private Double rentabilidade;
+	private Double fundos;	
 }
