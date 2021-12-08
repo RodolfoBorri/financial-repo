@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.uem.br.financial.dto.response.ContaResponseDTO;
 import com.uem.br.financial.dto.response.RelatorioFluxoResponseDTO;
+import com.uem.br.financial.dto.response.RelatorioTipoContaResponseDTO;
 import com.uem.br.financial.entity.Usuario;
 
 @Service
@@ -99,5 +100,56 @@ public class RelatorioService {
 		conteudoRelatorio.add(fluxoResponseDTO);
 		
 		return conteudoRelatorio;
+	}
+
+	public List<ContaResponseDTO> geraArquivoExtrato(Long idUsuario) {
+		Usuario usuario = usuarioService.buscaPorId(idUsuario);
+		
+		return contaService.consultaContasExtrato(usuario);
+	}
+
+	public List<RelatorioTipoContaResponseDTO> geraArquivoTipoConta(Long idUsuario) {
+		Usuario usuario = usuarioService.buscaPorId(idUsuario);
+		
+		List<RelatorioTipoContaResponseDTO> conteudo = new ArrayList<RelatorioTipoContaResponseDTO>();
+		
+		List<ContaResponseDTO> contasPorTipo = contaService.consultaContasPorTipo(usuario);
+		
+		ContaResponseDTO contaAnterior = new ContaResponseDTO();
+		int contador = 0;
+		
+		List<ContaResponseDTO> subListaContas = new ArrayList<ContaResponseDTO>();
+		
+		for(ContaResponseDTO conta : contasPorTipo) {
+			
+			if(!conta.getTipoConta().equals(contaAnterior.getTipoConta())) {
+				
+				subListaContas.add(conta);
+				
+				if(contador != 0) {
+					RelatorioTipoContaResponseDTO dto = new RelatorioTipoContaResponseDTO();
+					dto.setTipoConta(contaAnterior.getTipoConta());
+					dto.setContas(subListaContas);
+					
+					conteudo.add(dto);
+					subListaContas = new ArrayList<ContaResponseDTO>();
+				}
+				
+			}
+			else 
+				subListaContas.add(conta);
+			
+			
+			contador++;
+			contaAnterior = conta;
+		}
+		
+		RelatorioTipoContaResponseDTO dto = new RelatorioTipoContaResponseDTO();
+		dto.setTipoConta(contaAnterior.getTipoConta());
+		dto.setContas(subListaContas);
+		
+		conteudo.add(dto);
+		
+		return conteudo;
 	}
 }

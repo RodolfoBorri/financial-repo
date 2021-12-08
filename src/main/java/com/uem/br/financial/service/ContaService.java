@@ -52,6 +52,17 @@ public class ContaService {
 		
 		return conta;
 	}
+	
+	public List<ContaResponseDTO> consultaContasExtrato(Usuario usuario){
+		List<Conta> contas = contaRepository.findRelatorioExtrato(usuario);
+		
+		List<ContaResponseDTO> retorno = new ArrayList<ContaResponseDTO>();
+		
+		for(Conta conta : contas) 
+			retorno.add(entidadeParaContaResponseDTO(conta));
+		
+		return retorno;
+	}
 
 	private ContaResponseDTO entidadeParaContaResponseDTO(Conta conta) {
 		return ContaResponseDTO.builder().id(conta.getId())
@@ -115,6 +126,17 @@ public class ContaService {
 		Conta conta = buscaPorId(idConta);
 		
 		return entidadeParaContaResponseDTO(conta); 
+	}
+
+	public List<ContaResponseDTO> consultaContasPorTipo(Usuario usuario) {
+		List<Conta> contas = contaRepository.findRelatorioTipoConta(usuario);
+		
+		List<ContaResponseDTO> response = new ArrayList<ContaResponseDTO>();
+
+		for(Conta conta : contas) 
+			response.add(entidadeParaContaResponseDTO(conta));
+		
+		return response;
 	}
 
 }
