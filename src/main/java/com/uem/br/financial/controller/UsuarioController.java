@@ -54,7 +54,7 @@ public class UsuarioController extends ControllerBase{
 		return ResponseEntity.ok(new ResponseDTO<>(retorno));		
 	}
 	
-	@PutMapping("{/id}")
+	@PutMapping("/{id}")
 	public ResponseEntity<ResponseDTO<Void>> altera(@PathVariable Long id, @Valid @RequestBody UserRequestDTO userRequestDTO){
 		userService.altera(id, userRequestDTO);
 		

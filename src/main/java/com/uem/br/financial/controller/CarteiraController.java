@@ -29,8 +29,8 @@ public class CarteiraController extends ControllerBase{
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<ResponseDTO<CarteiraResponseDTO>> buscaCarteiraPorIdUsuario(@PathVariable Long idUsuario){
-		CarteiraResponseDTO carteiraResponseDTO = carteiraService.buscaCarteiraPorIdUsuario(idUsuario);
+	public ResponseEntity<ResponseDTO<CarteiraResponseDTO>> buscaCarteiraPorIdUsuario(@PathVariable Long id){
+		CarteiraResponseDTO carteiraResponseDTO = carteiraService.buscaCarteiraPorIdUsuario(id);
 		
 		return ResponseEntity.ok(new ResponseDTO<>(carteiraResponseDTO));
 	}

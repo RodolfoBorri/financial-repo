@@ -55,7 +55,7 @@ public class ContaController extends ControllerBase{
 		return ResponseEntity.ok(new ResponseDTO<>(conta));	
 	}
 	
-	@PutMapping("{/id}")
+	@PutMapping("/{id}")
 	public ResponseEntity<ResponseDTO<Void>> altera(@PathVariable Long id, @Valid @RequestBody ContaRequestDTO contaRequestDTO){
 		contaService.altera(id, contaRequestDTO);
 		

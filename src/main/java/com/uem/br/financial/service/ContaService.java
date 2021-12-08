@@ -99,6 +99,17 @@ public class ContaService {
 		
 		return response;
 	}
+	
+	public List<ContaResponseDTO> consultaContasRelatorioFluxo(Long idUsuario){
+		List<Conta> contas = contaRepository.findRelatorioFluxo(idUsuario);
+		
+		List<ContaResponseDTO> response = new ArrayList<ContaResponseDTO>();
+
+		for(Conta conta : contas) 
+			response.add(entidadeParaContaResponseDTO(conta));
+		
+		return response;
+	}
 
 	public ContaResponseDTO consultaContaPorIdConta(Long idConta) {
 		Conta conta = buscaPorId(idConta);
