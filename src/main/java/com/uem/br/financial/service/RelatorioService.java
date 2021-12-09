@@ -22,13 +22,13 @@ public class RelatorioService {
 	@Autowired
 	UsuarioService usuarioService;
 	
-	public List<RelatorioFluxoResponseDTO> geraArquivoFluxo(Long idUsuario){
+	public List<RelatorioFluxoResponseDTO> geraArquivoFluxo(){
 		
 		List<RelatorioFluxoResponseDTO> conteudoRelatorio = new ArrayList<RelatorioFluxoResponseDTO>();
 		
-		Usuario usuario = usuarioService.buscaPorId(idUsuario);
+		Usuario usuario = usuarioService.buscaPorId();
 		
-		List<ContaResponseDTO> contas = contaService.consultaTodasContasPorUsuario(idUsuario);
+		List<ContaResponseDTO> contas = contaService.consultaTodasContasPorUsuario();
 		
 		int saldoAnterior = usuario.getCarteira().getFundos().intValue();
 		int mesAnterior = -1;
@@ -102,14 +102,14 @@ public class RelatorioService {
 		return conteudoRelatorio;
 	}
 
-	public List<ContaResponseDTO> geraArquivoExtrato(Long idUsuario) {
-		Usuario usuario = usuarioService.buscaPorId(idUsuario);
+	public List<ContaResponseDTO> geraArquivoExtrato() {
+		Usuario usuario = usuarioService.buscaPorId();
 		
 		return contaService.consultaContasExtrato(usuario);
 	}
 
-	public List<RelatorioTipoContaResponseDTO> geraArquivoTipoConta(Long idUsuario) {
-		Usuario usuario = usuarioService.buscaPorId(idUsuario);
+	public List<RelatorioTipoContaResponseDTO> geraArquivoTipoConta() {
+		Usuario usuario = usuarioService.buscaPorId();
 		
 		List<RelatorioTipoContaResponseDTO> conteudo = new ArrayList<RelatorioTipoContaResponseDTO>();
 		

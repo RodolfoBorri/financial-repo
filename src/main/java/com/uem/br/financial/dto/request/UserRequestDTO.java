@@ -2,6 +2,9 @@ package com.uem.br.financial.dto.request;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.uem.br.financial.DateHandler;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,6 +28,7 @@ public class UserRequestDTO {
 
 	private String cpfcnpj;
 
+	@JsonDeserialize(using = DateHandler.class)
 	private Date dataNasc;
 	
 	private Long idTipoUsuario;

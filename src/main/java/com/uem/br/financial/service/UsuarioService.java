@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.uem.br.financial.controller.UserBindingData;
 import com.uem.br.financial.dto.request.UserRequestDTO;
 import com.uem.br.financial.dto.response.UserResponseDTO;
 import com.uem.br.financial.entity.Usuario;
@@ -68,14 +69,14 @@ public class UsuarioService {
 		}
 	}
 	
-	public Usuario buscaPorId(Long idUsuario) {
-		return userRepository.findById(idUsuario).orElseThrow(() -> new ServiceException("DB-6", idUsuario));
+	public Usuario buscaPorId() {
+		return userRepository.findById(UserBindingData.getIdUsuario()).get();
 	}
 
-	public void altera(Long idUsuario, @Valid UserRequestDTO userRequestDTO) {
+	public void altera(@Valid UserRequestDTO userRequestDTO) {
 		validacaoUsuario(userRequestDTO);
 		
-		Usuario usuarioAlterado = usuarioRequestDTOParaEntidade(userRequestDTO, buscaPorId(idUsuario));
+		Usuario usuarioAlterado = usuarioRequestDTOParaEntidade(userRequestDTO, buscaPorId());
 		
 		userRepository.save(usuarioAlterado);		
 	}
@@ -92,14 +93,14 @@ public class UsuarioService {
 		return retorno;
 	}
 
-	public UserResponseDTO consultaPorId(Long id) {
-		Usuario usuario = buscaPorId(id);
+	public UserResponseDTO consultaPorId() {
+		Usuario usuario = buscaPorId();
 		
 		return entidadeParaUsuarioResponseDTO(usuario);
 	}
 
-	public void refleteOperacao(String categoria, Double valor, Long idUsuario) {
-		Usuario usuario = buscaPorId(idUsuario);
+	public void refleteOperacao(String categoria, Double valor) {
+		Usuario usuario = buscaPorId();
 		
 		carteiraService.refleteAlteracaoCarteira(categoria, valor, usuario);		
 	}

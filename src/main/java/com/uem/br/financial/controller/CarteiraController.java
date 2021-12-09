@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,9 +27,9 @@ public class CarteiraController extends ControllerBase{
 		super(messageSource);
 	}
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<ResponseDTO<CarteiraResponseDTO>> buscaCarteiraPorIdUsuario(@PathVariable Long id){
-		CarteiraResponseDTO carteiraResponseDTO = carteiraService.buscaCarteiraPorIdUsuario(id);
+	@GetMapping
+	public ResponseEntity<ResponseDTO<CarteiraResponseDTO>> buscaCarteira(){
+		CarteiraResponseDTO carteiraResponseDTO = carteiraService.buscaCarteira();
 		
 		return ResponseEntity.ok(new ResponseDTO<>(carteiraResponseDTO));
 	}

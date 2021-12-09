@@ -40,14 +40,14 @@ public class CarteiraService {
 		return CarteiraResponseDTO.builder().fundos(carteira.getFundos()).build();
 	}
 	
-	public CarteiraResponseDTO buscaCarteiraPorIdUsuario(Long idUsuario) {
-		Carteira carteira = carteiraRepository.findById(usuarioService.buscaPorId(idUsuario).getCarteira().getId()).get();
+	public CarteiraResponseDTO buscaCarteira() {
+		Carteira carteira = carteiraRepository.findById(usuarioService.buscaPorId().getCarteira().getId()).get();
 		
 		return entidadeParaCarteiraResponseDTO(carteira);
 	}
 
 	public void adicionaFundos(CarteiraRequestDTO carteiraRequestDTO) {
-		Usuario usuario = usuarioService.buscaPorId(carteiraRequestDTO.getIdUsuario());
+		Usuario usuario = usuarioService.buscaPorId();
 		Carteira carteira = buscaPorId(usuario.getCarteira().getId());
 		
 		validaFundos(carteiraRequestDTO);

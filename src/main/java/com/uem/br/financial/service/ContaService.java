@@ -26,6 +26,7 @@ public class ContaService {
 	UsuarioService userService;
 	
 	public ContaResponseDTO adiciona(ContaRequestDTO contaRequestDTO) {
+		contaRequestDTO.setIdUsuario(new Long(1));
 		validacaoConta(contaRequestDTO);
 		
 		realizaOperacao(contaRequestDTO);
@@ -38,7 +39,7 @@ public class ContaService {
 	}
 
 	private void realizaOperacao(ContaRequestDTO contaRequestDTO) {
-		userService.refleteOperacao(contaRequestDTO.getCategoria(), contaRequestDTO.getValor(), contaRequestDTO.getIdUsuario());		
+		userService.refleteOperacao(contaRequestDTO.getCategoria(), contaRequestDTO.getValor());		
 	}
 
 	private Conta contaRequestDTOParaEntidade(ContaRequestDTO contaRequestDTO, Conta conta) {
@@ -48,7 +49,7 @@ public class ContaService {
 		conta.setDescricao(contaRequestDTO.getDescricao());
 		conta.setValor(contaRequestDTO.getValor());
 		conta.setTipoConta(tipoContaService.buscaPorId(contaRequestDTO.getIdTipoConta()));
-		conta.setUsuario(userService.buscaPorId(contaRequestDTO.getIdUsuario()));
+		conta.setUsuario(userService.buscaPorId());
 		
 		return conta;
 	}
@@ -98,8 +99,8 @@ public class ContaService {
 		contaRepository.delete(conta);
 	}
 
-	public List<ContaResponseDTO> consultaTodasContasPorUsuario(Long id) {
-		Usuario usuario = userService.buscaPorId(id);
+	public List<ContaResponseDTO> consultaTodasContasPorUsuario() {
+		Usuario usuario = userService.buscaPorId();
 		
 		List<Conta> contas = contaRepository.findAllByUsuario(usuario);
 		

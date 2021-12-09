@@ -41,14 +41,14 @@ public class ContaController extends ControllerBase{
 							 .body(new ResponseDTO<>(contaResponseDTO));
 	}
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<ResponseDTO<List<ContaResponseDTO>>> consultaTodasContasPorUsuario(@PathVariable Long id){
-		List<ContaResponseDTO> contasUsuario = contaService.consultaTodasContasPorUsuario(id);
+	@GetMapping
+	public ResponseEntity<ResponseDTO<List<ContaResponseDTO>>> consultaTodasContasPorUsuario(){
+		List<ContaResponseDTO> contasUsuario = contaService.consultaTodasContasPorUsuario();
 		
 		return ResponseEntity.ok(new ResponseDTO<>(contasUsuario));	
 	}
 	
-	@GetMapping("/conta/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<ResponseDTO<ContaResponseDTO>> consultaContaPorIdConta(@PathVariable Long id){
 		ContaResponseDTO conta = contaService.consultaContaPorIdConta(id);
 		
